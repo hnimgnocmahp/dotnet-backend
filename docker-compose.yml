@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgre2
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: dotnet_backend
+    ports:
+      - "2222:5432"   
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin2
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ad@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 123456
+    ports:
+      - "5051:80"  # Truy cập PgAdmin qua http://localhost:5051
+    depends_on:
+      - postgres
+
+volumes:
+  db_data:
