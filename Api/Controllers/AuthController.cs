@@ -1,3 +1,4 @@
+using Api.Models;
 using Application.DTOs.User;
 using Application.UseCases;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,9 @@ public class AuthController : ControllerBase
     {
         var response = await _loginUser.ExecuteAsync(request);
         if (response == null)
-            return Unauthorized(new { message = "Invalid username or password" });
+            return Unauthorized(ApiResponse<string>.ErrorResponse("Invalid username or password"));
 
-        return Ok(response);
+        return Ok(ApiResponse<object>.SuccessResponse(response, "login successfully"));
     }
 
     [HttpPost("register")]
@@ -32,11 +33,11 @@ public class AuthController : ControllerBase
         try
         {
             var result = await _registerUser.ExecuteAsync(request);
-            return Ok(result);
+            return Ok(ApiResponse<object>.SuccessResponse(result!, "Register successfully"));
         }
         catch (Exception ex)
         {
-            return BadRequest(new { message = ex.Message });
+            return BadRequest(ApiResponse<string>.ErrorResponse(ex.Message));
         }
         
     }
