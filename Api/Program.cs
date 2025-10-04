@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseNpgsql(connectionString));
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
