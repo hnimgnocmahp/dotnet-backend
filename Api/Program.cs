@@ -10,13 +10,13 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DbContext
+// DbContext //
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Repository
+// Repository //
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -28,17 +28,45 @@ builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
-// Security
+// Security //
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
-// UseCases
+// UseCases //
+
+//User
 builder.Services.AddScoped<LoginUserUseCase>();
-builder.Services.AddScoped<GetProductsUseCase>();
-builder.Services.AddScoped<CreateProductUseCase>();
 builder.Services.AddScoped<RegisterUserUseCase>();
 
-// CORS
+//Product
+builder.Services.AddScoped<GetProductsUseCase>();
+builder.Services.AddScoped<CreateProductUseCase>();
+
+//Category
+
+
+//Customer
+
+//Inventory
+
+
+//Order
+
+//Order Item
+
+//Payment
+
+//Promotion
+builder.Services.AddScoped<AddPromotionUseCase>();
+builder.Services.AddScoped<UpdatePromotionUseCase>();
+builder.Services.AddScoped<DelPromotionUseCase>();
+builder.Services.AddScoped<GetPromotionByIdUseCase>();
+
+//Supplier
+
+//----------//
+
+// CORS //
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -58,7 +86,7 @@ builder.Services.AddCors(options =>
 });
 
 
-// JWT Config
+// JWT Config //
 var config = builder.Configuration;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
