@@ -25,7 +25,7 @@ public class ProductController : ControllerBase
     {
         var response = await _getProducts.ExecuteAsync();
 
-        return Ok(ApiResponse<string>.SuccessResponse("Get successfully"));
+        return Ok(ApiResponse<object>.SuccessResponse(response, "Get successfully"));
     }
 
     [HttpPost("add")]
