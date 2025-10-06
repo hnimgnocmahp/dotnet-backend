@@ -1,4 +1,5 @@
 using Application.DTOs.Product;
+using Application.Mappers;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -13,16 +14,10 @@ public class CreateProductUseCase
         _repo = repo;
     }
 
-    public async Task<Product> ExecuteAsync(CreateProductRequest request)
+    public async Task<ProductResponse> ExecuteAsync(ProductRequest request)
     {
-        var product = new Product
-        {
-            ProductName = request.name,
-            Price = request.price
-        };
-
+        var product = request.ToEntity();
         await _repo.AddAsync(product);
-
-        return product;
+        return product.ToResponse();
     }
 }

@@ -1,5 +1,6 @@
 using Application;
 using Application.DTOs.Product;
+using Application.Mappers;
 using Domain.Interfaces;
 
 namespace Application.UseCases;
@@ -16,6 +17,6 @@ public class GetProductsUseCase
     public async Task<IEnumerable<ProductResponse>> ExecuteAsync()
     {
         var products = await _repo.GetAllAsync();
-        return products.Select(p => new ProductResponse(p.ProductId, p.ProductName, p.Price));
+        return products.ToResponse();
     }
 }

@@ -1,12 +1,10 @@
 namespace Application.DTOs.Product;
 
-public record ProductResponse(
-    int ProductId,
+public record ProductRequest(
     int CategoryId,
     int SupplierId,
     string ProductName,
     string Barcode,
     decimal Price,
-    string Unit,
-    DateTime CreatedAt
+    string Unit
 );
