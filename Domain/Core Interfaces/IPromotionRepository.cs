@@ -5,8 +5,8 @@ namespace Domain.Interfaces;
 
 public interface IPromotionRepository
 {
-    Task<User?> GetPromotionByIdAsync(int id);
-    Task<User> AddAsync(Promotion promotion);
-    Task<User> UpdateAsyncs(int id);
-    Task DelAsyncs(int id);
+    Task<Promotion?> GetPromotionByIdAsync(int id);
+    Task<Promotion> AddAsync(Promotion promotion);
+    Task<Promotion?> UpdateAsync(Promotion promotion);
+    Task<bool> DelAsync(int id);
 }

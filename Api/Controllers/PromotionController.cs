@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("api/[controller]")]public class PromotionController : Controller
 {
-    private readonly AddPromotionUseCase _addPromotion;
+    private readonly CreatePromotionUseCase _createPromotion;
     private readonly UpdatePromotionUseCase _updatePromotion;
     private readonly DelPromotionUseCase _delPromotion;
     private readonly GetPromotionByIdUseCase _getPromotion;
 
-    public PromotionController(AddPromotionUseCase addPromotion, UpdatePromotionUseCase updatePromotion, DelPromotionUseCase delPromotion, GetPromotionByIdUseCase getPromotion)
+    public PromotionController(CreatePromotionUseCase createPromotion, UpdatePromotionUseCase updatePromotion, DelPromotionUseCase delPromotion, GetPromotionByIdUseCase getPromotion)
     {
-        _addPromotion = addPromotion;
+        _createPromotion = createPromotion;
         _updatePromotion = updatePromotion;
         _delPromotion = delPromotion;
         _getPromotion = getPromotion;
@@ -22,7 +22,7 @@ using Microsoft.AspNetCore.Mvc;
     [HttpPost("add")]
     public async Task<IActionResult> Add([FromBody] PromotionRequest request)
     {
-        var response = await _addPromotion.ExecuteAsync(request);
+        var response = await _createPromotion.ExecuteAsync(request);
         if (response == null)
             return BadRequest(ApiResponse<string>.ErrorResponse("Cannot create promotion"));
 

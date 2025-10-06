@@ -43,10 +43,7 @@ namespace Domain.Entities;
 
         [Column("usage_limit")]
         public int UsageLimit { get; set; } = 0;
-
-        [Column("used_count")]
-        public int UsedCount { get; set; } = 0;
-
+        
         [Column("status")]
         [MaxLength(10)]
         public string Status { get; set; } = "active";

@@ -57,7 +57,7 @@ builder.Services.AddScoped<CreateProductUseCase>();
 //Payment
 
 //Promotion
-builder.Services.AddScoped<AddPromotionUseCase>();
+builder.Services.AddScoped<CreatePromotionUseCase>();
 builder.Services.AddScoped<UpdatePromotionUseCase>();
 builder.Services.AddScoped<DelPromotionUseCase>();
 builder.Services.AddScoped<GetPromotionByIdUseCase>();
