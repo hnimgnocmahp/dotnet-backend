@@ -1,3 +1,4 @@
+using Api.Models;
 using Application.DTOs.Product;
 using Application.UseCases;
 using Microsoft.AspNetCore.Authorization;
@@ -22,15 +23,19 @@ public class ProductController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var products = await _getProducts.ExecuteAsync();
-        return Ok(products);
+        var response = await _getProducts.ExecuteAsync();
+
+        return Ok(ApiResponse<string>.SuccessResponse("Get successfully"));
     }
 
     [HttpPost("add")]
-    public async Task<IActionResult> Create([FromBody] CreateProductRequest request)
+    public async Task<IActionResult> Create([FromBody] ProductRequest request)
     {
-        var product = await _createProduct.ExecuteAsync(request);
-        return CreatedAtAction(nameof(GetAll), new { id = product.ProductId }, product);
+        var response = await _createProduct.ExecuteAsync(request);
+        if (response == null)
+            return BadRequest(ApiResponse<string>.ErrorResponse("Cannot create product"));
+
+        return Ok(ApiResponse<object>.SuccessResponse(response, "Create successfully"));
     }
 
     [HttpGet("test")]
@@ -39,9 +44,4 @@ public class ProductController : ControllerBase
         return Ok("API is working!");
     }
 
-
-
-
-
-    
 }
