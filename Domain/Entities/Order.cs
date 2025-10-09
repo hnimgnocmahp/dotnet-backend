@@ -17,7 +17,7 @@ namespace Domain.Entities;
         public int UserId { get; set; }
 
         [Column("promo_id")]
-        public int PromoId { get; set; }
+        public int? PromoId { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("order_date")]

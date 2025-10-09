@@ -19,6 +19,9 @@ public static class PromotionMapper
             entity.Status
         );
 
+    public static List<PromotionResponse> ToResponse(this IEnumerable<Promotion> entities)
+        => entities.Select(o => o.ToResponse()).ToList();
+
     public static Promotion ToEntity(this PromotionRequest request)
         => new()
         {

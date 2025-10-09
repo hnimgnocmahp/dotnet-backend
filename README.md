@@ -22,3 +22,7 @@ Port: 3306
 User: root
 Password: root
 Database: store_management
+
+## 4. Chạy chương trình
+    1. cd vào thư mục Api
+    2. chạy câu lệnh "dotnet run" hoặc "dotnet watch run"

@@ -10,13 +10,24 @@ using Microsoft.AspNetCore.Mvc;
     private readonly UpdatePromotionUseCase _updatePromotion;
     private readonly DelPromotionUseCase _delPromotion;
     private readonly GetPromotionByIdUseCase _getPromotion;
+    private readonly GetAllPromotionUseCase _getAll;
+    private readonly GetPromotionsWithMinOrderAmountGreaterThanUseCase _getPromotionsWithMinOrderAmountGreaterThan;
 
-    public PromotionController(CreatePromotionUseCase createPromotion, UpdatePromotionUseCase updatePromotion, DelPromotionUseCase delPromotion, GetPromotionByIdUseCase getPromotion)
+    public PromotionController(
+        CreatePromotionUseCase createPromotion,
+        UpdatePromotionUseCase updatePromotion,
+        DelPromotionUseCase delPromotion,
+        GetPromotionByIdUseCase getPromotion,
+        GetAllPromotionUseCase getAll,
+        GetPromotionsWithMinOrderAmountGreaterThanUseCase getPromotionsWithMinOrderAmountGreaterThan
+    )
     {
         _createPromotion = createPromotion;
         _updatePromotion = updatePromotion;
         _delPromotion = delPromotion;
         _getPromotion = getPromotion;
+        _getAll = getAll;
+        _getPromotionsWithMinOrderAmountGreaterThan = getPromotionsWithMinOrderAmountGreaterThan;
     }
 
     [HttpPost("add")]
@@ -58,4 +69,25 @@ using Microsoft.AspNetCore.Mvc;
 
         return Ok(ApiResponse<object>.SuccessResponse(response, "Get successfully"));
     }
+
+    [HttpGet()]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var response = await _getAll.ExecuteAsync();
+        if (response == null)
+            return NotFound(ApiResponse<string>.ErrorResponse("Promotion not found"));
+
+        return Ok(ApiResponse<object>.SuccessResponse(response, "Get successfully"));
+    }
+
+    [HttpGet("min-order/{minOrderAmount}")]
+    public async Task<IActionResult> GetPromotionsWithMinOrderAmountGreaterThanAsync(decimal minOrderAmount)
+    {
+        var response = await _getPromotionsWithMinOrderAmountGreaterThan.ExecuteAsync(minOrderAmount);
+        if (response == null)
+            return NotFound(ApiResponse<string>.ErrorResponse("Promotion not found"));
+
+        return Ok(ApiResponse<object>.SuccessResponse(response, "Get successfully"));
+    }
+    
 }

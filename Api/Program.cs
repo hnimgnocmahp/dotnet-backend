@@ -51,6 +51,12 @@ builder.Services.AddScoped<CreateProductUseCase>();
 
 
 //Order
+builder.Services.AddScoped<CreateOrderUseCase>();
+builder.Services.AddScoped<UpdateOrderUseCase>();
+builder.Services.AddScoped<DelOrderUseCase>();
+builder.Services.AddScoped<GetOrderIdUseCase>();
+builder.Services.AddScoped<GetOrderByUserIdUseCase>();
+builder.Services.AddScoped<GetAllOrderUseCase>();
 
 //Order Item
 
@@ -61,6 +67,8 @@ builder.Services.AddScoped<CreatePromotionUseCase>();
 builder.Services.AddScoped<UpdatePromotionUseCase>();
 builder.Services.AddScoped<DelPromotionUseCase>();
 builder.Services.AddScoped<GetPromotionByIdUseCase>();
+builder.Services.AddScoped<GetAllPromotionUseCase>();
+builder.Services.AddScoped<GetPromotionsWithMinOrderAmountGreaterThanUseCase>();
 
 //Supplier
 
@@ -76,9 +84,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.WithOrigins(
-                "http://localhost:3000",
-                "http://localhost:3001"
-                
+                "http://localhost:5173"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod();

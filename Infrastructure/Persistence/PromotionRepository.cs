@@ -12,6 +12,12 @@ public class PromotionRepository : IPromotionRepository
     public async Task<Promotion?> GetPromotionByIdAsync(int id)
         => await _context.Promotions.FirstOrDefaultAsync(p => p.PromoId == id);
 
+    public async Task<List<Promotion>?> GetAllAsync()
+        => await _context.Promotions.ToListAsync();
+
+    public async Task<List<Promotion>?> GetPromotionsWithMinOrderAmountGreaterThanAsync(decimal minOrderAmount)
+        => await _context.Promotions.Where(o => o.MinOrderAmount >= minOrderAmount && o.EndDate >= DateTime.Now && o.Status.Equals("active")).ToListAsync();
+
     public async Task<Promotion> AddAsync(Promotion promotion)
     {
         _context.Promotions.Add(promotion);
