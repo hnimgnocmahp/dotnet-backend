@@ -18,6 +18,7 @@ namespace Domain.Entities;
 
         [Column("created_at")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
