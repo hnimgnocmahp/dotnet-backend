@@ -21,10 +21,7 @@ public class UpdateOrderUseCase
 
         if (order == null) return null;
 
-        order.PromoId = request.PromoId;
-        // order.TotalAmount = request.TotalAmount;
-        // order.DiscountAmount = request.DiscountAmount;
-  
+        order.Status = request.Status;
 
         await _orderRepo.UpdateAsync(order);
 
