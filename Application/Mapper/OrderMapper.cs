@@ -29,6 +29,7 @@ public static class OrderMapper
             PromoId = request.PromoId,
             TotalAmount = request.TotalAmount,
             DiscountAmount = request.DiscountAmount,
+            Status = request.Status
         };
 
 }

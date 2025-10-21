@@ -5,5 +5,6 @@ public record OrderRequest(
     int UserId,
     int PromoId,
     decimal TotalAmount,
-    decimal DiscountAmount
+    decimal DiscountAmount,
+    string Status
 );

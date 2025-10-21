@@ -5,7 +5,8 @@ using Application.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]public class OrderController : Controller
+[Route("api/[controller]")]
+public class OrderController : Controller
 {
     private readonly CreateOrderUseCase _createOrder;
     private readonly UpdateOrderUseCase _updateOrder;
