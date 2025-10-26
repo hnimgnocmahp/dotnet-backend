@@ -1,4 +1,5 @@
 using Application.Interfaces;
+using Application.Usecases.Category;
 using Application.UseCases;
 using Domain.Interfaces;
 using Infrastructure.Persistence;
@@ -41,9 +42,13 @@ builder.Services.AddScoped<RegisterUserUseCase>();
 //Product
 builder.Services.AddScoped<GetProductsUseCase>();
 builder.Services.AddScoped<CreateProductUseCase>();
+builder.Services.AddScoped<DeleteProductUseCase>();
+builder.Services.AddScoped<UpdateProductUseCase>();
 
 //Category
-
+builder.Services.AddScoped<GetCategoryByIdUseCase>();
+builder.Services.AddScoped<GetAllCategoryUseCase>();
+builder.Services.AddScoped<CreateCategoryUseCase>();
 
 //Customer
 
@@ -71,7 +76,11 @@ builder.Services.AddScoped<GetAllPromotionUseCase>();
 builder.Services.AddScoped<GetPromotionsWithMinOrderAmountGreaterThanUseCase>();
 
 //Supplier
-
+builder.Services.AddScoped<GetSupplierByIdUseCase>();
+builder.Services.AddScoped<GetAllSupplierUseCase>();
+builder.Services.AddScoped<CreateSupplierUseCase>();    
+builder.Services.AddScoped<UpdateSupplierUseCase>();
+builder.Services.AddScoped<DeleteSupplierUseCase>();    
 //----------//
 
 // CORS //

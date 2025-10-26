@@ -33,7 +33,13 @@ namespace Domain.Entities;
         [MaxLength(20)]
         public string Unit { get; set; } = "pcs";
 
-        [Column("created_at")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    [Column("created_at")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+            // 🔹 Thêm navigation properties
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; } = null!;
+
+    [ForeignKey("SupplierId")]
+    public Supplier Supplier { get; set; } = null!;
     }
