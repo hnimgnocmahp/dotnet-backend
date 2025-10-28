@@ -8,7 +8,7 @@ public interface IOrderItemRepository
     Task<List<OrderItem>?> GetOrderItemByOrderIdAsync(int orderId);
     Task<List<OrderItem>> GetAllAsync();
     Task<OrderItem> AddAsync(OrderItem item);
-    // Task<OrderItem?> UpdateAsync(OrderItem item);
-    // Task<bool> DelAsync(int id);
+   // Task<OrderItem?> UpdateAsync(OrderItem item);
+   // Task<bool> DelAsync(int id);
 }
 

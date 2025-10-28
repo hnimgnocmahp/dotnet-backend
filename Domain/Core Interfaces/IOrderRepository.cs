@@ -10,4 +10,7 @@ public interface IOrderRepository
     Task<Order> AddAsync(Order promotion);
     Task<Order?> UpdateAsync(Order promotion);
     Task<bool> DelAsync(int id);
+    Task<decimal> GetTotalSpendingByCustomerIdAsync(int customerId);
+    Task<IEnumerable<Order>> GetByCustomerIdWithDetailsAsync(int customerId);
+
 }

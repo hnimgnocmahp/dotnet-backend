@@ -1,12 +1,14 @@
+﻿using System.Text;
 using Application.Interfaces;
+using Application.Usecases.Customer;
 using Application.UseCases;
+using Application.UseCases.Customer;
 using Domain.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,7 +48,14 @@ builder.Services.AddScoped<CreateProductUseCase>();
 
 
 //Customer
-
+builder.Services.AddScoped<CreateCustomerUseCase>();
+builder.Services.AddScoped<UpdateCustomerUseCase>();
+builder.Services.AddScoped<DeleteCustomerUseCase>();
+builder.Services.AddScoped<GetCustomerByIdUseCase>(); 
+builder.Services.AddScoped<GetAllCustomersUseCase>();
+builder.Services.AddScoped<SearchCustomersUseCase>();
+builder.Services.AddScoped<GetCustomerSegmentUseCase>();
+builder.Services.AddScoped<GetCustomerPurchaseHistoryUseCase>();
 //Inventory
 
 
@@ -69,7 +78,6 @@ builder.Services.AddScoped<DelPromotionUseCase>();
 builder.Services.AddScoped<GetPromotionByIdUseCase>();
 builder.Services.AddScoped<GetAllPromotionUseCase>();
 builder.Services.AddScoped<GetPromotionsWithMinOrderAmountGreaterThanUseCase>();
-
 //Supplier
 
 //----------//

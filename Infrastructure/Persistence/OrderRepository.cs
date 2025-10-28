@@ -1,4 +1,4 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +38,23 @@ public class OrderRepository : IOrderRepository
         if (existing == null) return false;
         _context.Orders.Remove(existing);
         await _context.SaveChangesAsync();
-        return true;   
+      return true;   
     }
 
+   public async Task<decimal> GetTotalSpendingByCustomerIdAsync(int customerId)
+   {
+      return await _context.Orders
+          .Where(o => o.CustomerId == customerId && o.Status == "Completed")
+          .SumAsync(o => o.TotalAmount); 
+   }
+
+   public async Task<IEnumerable<Order>> GetByCustomerIdWithDetailsAsync(int customerId)
+   {
+      // Query này dùng Eager Loading để lấy tất cả dữ liệu liên quan
+      return await _context.Orders
+          .Where(o => o.CustomerId == customerId) // 1. Lọc theo CustomerId
+          .OrderByDescending(o => o.OrderDate)   // 4. Sắp xếp (mới nhất trước)
+          .AsNoTracking()                        // 5. Tối ưu cho việc đọc
+          .ToListAsync();
+   }
 }
