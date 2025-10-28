@@ -1,6 +1,6 @@
 ﻿using Application.DTOs.Customer;
 using Domain.Interfaces;
-namespace Application.UseCases.Customer;
+namespace Application.Usecases.Customer;
 
 public class GetCustomerSegmentUseCase(
     ICustomerRepository customerRepository,

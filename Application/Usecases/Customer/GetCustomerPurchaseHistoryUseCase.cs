@@ -1,10 +1,5 @@
 ﻿using Application.DTOs.Order;
-using Domain.Entities;
 using Domain.Interfaces;
-using System.Collections.Generic; // Dùng cho KeyNotFoundException
-using System.Linq; // Dùng cho .Select (LINQ)
-using System.Threading.Tasks;
-
 namespace Application.Usecases.Customer;
 
 public class GetCustomerPurchaseHistoryUseCase(

@@ -2,9 +2,7 @@
 using Application.DTOs.Customer;
 using Application.Usecases.Customer;
 using Application.UseCases;
-using Application.UseCases.Customer;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
 {
@@ -76,8 +74,14 @@ namespace Api.Controllers
             if (response == null)
                return BadRequest(ApiResponse<string>.ErrorResponse("Cannot create customer"));
 
-            return Ok(ApiResponse<object>.SuccessResponse(response, "Create successfully"));
-        }
+         //return Ok(ApiResponse<object>.SuccessResponse(response, "Create successfully"));
+            // Dùng CreatedAtAction
+            return CreatedAtAction(
+                nameof(GetById), // Tên của hàm [HttpGet("{id}")]
+                new { id = response.CustomerId }, // Tham số route cho GetById
+                ApiResponse<object>.SuccessResponse(response, "Create successfully")
+            );
+      }
 
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
@@ -87,7 +91,7 @@ namespace Api.Controllers
             if (!success)
                return NotFound(ApiResponse<string>.ErrorResponse("Customer not found or cannot delete"));
 
-            return Ok(ApiResponse<string>.SuccessResponse("Delete successfully"));
+            return NoContent();
         }
 
       // GET: api/customers/search?term=nguyen&page=2&pageSize=5
@@ -131,21 +135,14 @@ namespace Api.Controllers
          [HttpGet("{id:int}/history")]
          public async Task<IActionResult> GetPurchaseHistory(int id)
          {
-            try
+            var history = await _getCustomerPurchaseHistoryUseCase.ExecuteAsync(id);
+
+            if (history == null)
             {
-               var history = await _getCustomerPurchaseHistoryUseCase.ExecuteAsync(id);
-               // Trả về 200 OK (ngay cả khi danh sách rỗng)
-               return Ok(ApiResponse<object>.SuccessResponse(history, "Get history successfully"));
+               return NotFound(ApiResponse<string>.ErrorResponse("Customer not found or has no history"));
             }
-            catch (KeyNotFoundException ex) // Bắt lỗi 404 nếu không tìm thấy Customer
-            {
-               return NotFound(ApiResponse<string>.ErrorResponse(ex.Message));
-            }
-            catch (Exception ex) // Bắt các lỗi chung khác
-            {
-               // Trả về 500 Internal Server Error
-               return StatusCode(500, ApiResponse<string>.ErrorResponse($"An error occurred: {ex.Message}"));
-            }
+
+            return Ok(ApiResponse<object>.SuccessResponse(history, "Get history successfully"));
          }
 
    }
