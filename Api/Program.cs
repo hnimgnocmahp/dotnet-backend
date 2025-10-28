@@ -1,6 +1,10 @@
 ﻿using System.Text;
 using Application.Interfaces;
+<<<<<<< HEAD
 using Application.Usecases.Customer;
+=======
+using Application.Usecases.Category;
+>>>>>>> 891f2d5cb37eb101ebaead2182724cd7b33ef0c0
 using Application.UseCases;
 using Application.UseCases.Customer;
 using Domain.Interfaces;
@@ -43,9 +47,13 @@ builder.Services.AddScoped<RegisterUserUseCase>();
 //Product
 builder.Services.AddScoped<GetProductsUseCase>();
 builder.Services.AddScoped<CreateProductUseCase>();
+builder.Services.AddScoped<DeleteProductUseCase>();
+builder.Services.AddScoped<UpdateProductUseCase>();
 
 //Category
-
+builder.Services.AddScoped<GetCategoryByIdUseCase>();
+builder.Services.AddScoped<GetAllCategoryUseCase>();
+builder.Services.AddScoped<CreateCategoryUseCase>();
 
 //Customer
 builder.Services.AddScoped<CreateCustomerUseCase>();
@@ -79,7 +87,11 @@ builder.Services.AddScoped<GetPromotionByIdUseCase>();
 builder.Services.AddScoped<GetAllPromotionUseCase>();
 builder.Services.AddScoped<GetPromotionsWithMinOrderAmountGreaterThanUseCase>();
 //Supplier
-
+builder.Services.AddScoped<GetSupplierByIdUseCase>();
+builder.Services.AddScoped<GetAllSupplierUseCase>();
+builder.Services.AddScoped<CreateSupplierUseCase>();    
+builder.Services.AddScoped<UpdateSupplierUseCase>();
+builder.Services.AddScoped<DeleteSupplierUseCase>();    
 //----------//
 
 // CORS //

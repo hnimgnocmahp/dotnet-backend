@@ -1,9 +1,10 @@
+using Application.DTOs.Supplier;
 namespace Application.DTOs.Product;
 
 public record ProductResponse(
     int ProductId,
-    int CategoryId,
-    int SupplierId,
+    CategoryResponse Category,
+    SupplierResponse Supplier,
     string ProductName,
     string Barcode,
     decimal Price,
